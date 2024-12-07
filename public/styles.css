@@ -1,0 +1,567 @@
+:root {
+    --primary-color: #6366f1;
+    --secondary-color: #8b5cf6;
+}
+
+.text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-purple-600;
+}
+
+.btn-primary {
+    @apply px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors;
+}
+
+.btn-primary:disabled {
+    @apply opacity-50 cursor-not-allowed;
+}
+
+.btn-secondary {
+    @apply px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors;
+}
+
+.progress-container {
+    @apply h-2 bg-gray-200 rounded-full overflow-hidden;
+}
+
+.progress-bar {
+    @apply h-full bg-gradient-to-r from-indigo-500 to-purple-500;
+    transition: width 0.3s ease-in-out;
+}
+
+.modal {
+    @apply fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center;
+    animation: modalFadeIn 0.3s ease-in-out;
+}
+
+.modal-content {
+    @apply bg-white rounded-lg p-6 w-full max-w-lg mx-4;
+    animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes modalSlideIn {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.proxy-card {
+    @apply bg-white p-4 rounded-lg shadow-md relative;
+    border: 1px solid #e5e7eb;
+    transform-style: flat;
+    backface-visibility: hidden;
+}
+
+.proxy-card::before {
+    display: none;
+}
+
+.proxy-card:hover {
+    @apply shadow-lg;
+    border-color: var(--primary-color);
+    background: linear-gradient(to bottom, 
+        rgba(255, 255, 255, 1) 0%,
+        rgba(249, 250, 251, 1) 100%
+    );
+}
+
+.proxy-card.success {
+    @apply bg-green-50 border-l-4 border-green-500;
+}
+
+.proxy-card.failed {
+    @apply bg-red-50 border-l-4 border-red-500;
+}
+
+.proxy-card.loading {
+    @apply bg-yellow-50 border-l-4 border-yellow-500;
+}
+
+.proxy-url {
+    @apply block text-gray-700 hover:text-indigo-600 transition-colors 
+           font-medium truncate mb-6 hover:underline;
+    max-width: calc(100% - 4rem);
+    position: relative;
+    z-index: 2;
+}
+
+.copy-btn {
+    @apply absolute bottom-2 right-2 p-2 text-gray-400 hover:text-gray-600 
+           bg-gray-50 hover:bg-gray-100 rounded-full transition-all duration-200;
+    z-index: 2;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-icon {
+    animation: spin 1s linear infinite;
+}
+
+.toast {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    background: white;
+    color: #1f2937;
+    padding: 0.75rem 1.5rem;
+    padding-right: 2.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    min-width: 250px;
+    max-width: 350px;
+    border-left: 4px solid var(--primary-color);
+    z-index: 9999;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all 0.3s ease-in-out;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.toast .close-btn {
+    position: absolute;
+    top: 50%;
+    right: 0.75rem;
+    transform: translateY(-50%);
+    cursor: pointer;
+    padding: 0.25rem;
+    color: #6b7280;
+    transition: color 0.2s ease-in-out;
+}
+
+.toast .close-btn:hover {
+    color: #1f2937;
+}
+
+.toast.error {
+    border-left-color: #ef4444;
+}
+
+.toast.success {
+    border-left-color: #10b981;
+}
+
+.toast.warning {
+    border-left-color: #f59e0b;
+}
+
+/* 移动端适配 */
+@media (max-width: 640px) {
+    .proxy-card {
+        @apply p-3;
+    }
+    
+    .speed-badge {
+        @apply px-2 py-1 text-2xs;
+    }
+    
+    .status-badge {
+        @apply px-2 py-0.5 text-2xs;
+    }
+    
+    .proxy-url {
+        @apply mb-4 text-sm;
+    }
+    
+    .copy-btn {
+        @apply p-1.5;
+    }
+}
+
+/* 自定义文字大小 */
+.text-2xs {
+    font-size: 0.625rem;
+    line-height: 0.75rem;
+}
+
+/* 背景动画效果 */
+.proxy-card::before {
+    display: none;
+}
+
+/* 速度标签样式 */
+.speed-badge {
+    @apply absolute top-0 right-0 px-3 py-1.5 text-xs font-semibold rounded-bl-2xl rounded-tr-lg transition-all duration-300 flex items-center gap-1;
+}
+
+.speed-badge.unknown {
+    @apply bg-gray-100 text-gray-600;
+}
+
+.speed-badge.slow {
+    @apply bg-yellow-100 text-yellow-700;
+}
+
+.speed-badge.medium {
+    @apply bg-green-100 text-green-700;
+}
+
+.speed-badge.fast {
+    @apply bg-blue-100 text-blue-700;
+}
+
+/* 状态标签样式 */
+.status-badge {
+    @apply absolute bottom-2 left-2 px-3 py-1 text-xs font-semibold rounded-full transition-all duration-300 flex items-center gap-1;
+}
+
+.status-badge.success {
+    @apply bg-green-100 text-green-700;
+}
+
+.status-badge.failed {
+    @apply bg-red-100 text-red-700;
+}
+
+.status-badge.testing {
+    @apply bg-yellow-100 text-yellow-700;
+}
+
+/* 卡片内容布局 */
+.proxy-card-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+/* 测试中动画效果 */
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.02); opacity: 0.8; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.proxy-card.testing {
+    animation: pulse 1.5s infinite ease-in-out;
+}
+
+.proxy-card.testing::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(255,255,255,0) 40%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 60%);
+    animation: shine 2s infinite linear;
+}
+
+@keyframes shine {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(100%); }
+}
+
+/* 分类标题样式 */
+.section-title {
+    @apply text-lg font-semibold text-gray-700 mb-4 flex items-center gap-2;
+}
+
+.success-section .section-title {
+    @apply text-green-600;
+}
+
+.failed-section .section-title {
+    @apply text-red-600;
+}
+
+/* 列表容器样式 */
+.proxy-list-container {
+    @apply relative;
+    height: calc(100vh - 250px);
+    min-height: 400px;
+}
+
+/* 列表包装器样式 */
+.proxy-list-wrapper {
+    @apply absolute inset-0 overflow-y-auto overflow-x-hidden;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(99, 102, 241, 0.5) rgba(229, 231, 235, 0.5);
+}
+
+/* Webkit 滚动条样式 */
+.proxy-list-wrapper::-webkit-scrollbar {
+    width: 8px;
+}
+
+.proxy-list-wrapper::-webkit-scrollbar-track {
+    @apply bg-gray-100 rounded-full;
+}
+
+.proxy-list-wrapper::-webkit-scrollbar-thumb {
+    @apply bg-indigo-500 rounded-full;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+}
+
+.proxy-list-wrapper::-webkit-scrollbar-thumb:hover {
+    @apply bg-indigo-600;
+}
+
+/* 卡片网格布局 */
+.proxy-list-wrapper .grid {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* 卡片样式优化 */
+.proxy-card {
+    @apply bg-white p-4 rounded-lg shadow-md relative;
+    border: 1px solid #e5e7eb;
+    transform-style: flat;
+    backface-visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.proxy-card:hover {
+    @apply shadow-lg;
+    transform: translateY(-2px);
+}
+
+/* 卡片内容布局优化 */
+.proxy-card-content {
+    @apply flex flex-col;
+}
+
+/* URL 容器样式优化 */
+.proxy-card .url-container {
+    @apply flex justify-between items-center mb-3;
+}
+
+/* 状态容器样式优化 */
+.proxy-card .status-container {
+    @apply grid grid-cols-3 gap-4;
+}
+
+/* 添加平滑滚动 */
+.proxy-list-wrapper {
+    scroll-behavior: smooth;
+}
+
+/* 响应式调整 */
+@media (max-width: 640px) {
+    .proxy-list-container {
+        height: calc(100vh - 200px);
+    }
+    
+    .proxy-list-wrapper .grid {
+        max-width: 100%;
+        padding: 0.5rem;
+    }
+    
+    .proxy-card {
+        @apply p-3;
+    }
+}
+
+/* shimmer 加载动画 */
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+.loading-shimmer {
+    background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite linear;
+}
+
+/* 空状态样式 */
+.empty-state {
+    @apply text-center py-12 text-gray-500;
+}
+
+.empty-state-icon {
+    @apply text-4xl mb-4 opacity-50;
+}
+
+/* 工具提示样式 */
+.tooltip {
+    @apply invisible absolute -top-8 left-1/2 transform -translate-x-1/2 px-2 py-1 text-xs text-white bg-gray-800 rounded whitespace-nowrap opacity-0 transition-all duration-200;
+}
+
+.copy-btn:hover .tooltip {
+    @apply visible opacity-100;
+}
+
+/* 添加文本选择样式 */
+.proxy-card *::selection {
+    background-color: rgba(99, 102, 241, 0.2);
+    color: inherit;
+}
+
+.proxy-card *::-moz-selection {
+    background-color: rgba(99, 102, 241, 0.2);
+    color: inherit;
+}
+
+/* 确保网格布局不影响选择 */
+.grid {
+    display: grid;
+    gap: 1rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* 模态框基础样式 */
+#contribute-modal,
+#about-modal {
+    @apply fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center;
+    z-index: 9999;
+}
+
+/* 模态框内容样式 */
+.modal-content {
+    @apply bg-white rounded-lg p-6 w-full max-w-md relative;
+    z-index: 10000;
+}
+
+/* 进度条容器样式 */
+#progress-container {
+    @apply fixed top-0 left-0 w-full h-1 bg-gray-200;
+    z-index: 9000;
+}
+
+/* Toast 消息样式 */
+.toast {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    background: white;
+    color: #1f2937;
+    padding: 0.75rem 1.5rem;
+    padding-right: 2.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    min-width: 250px;
+    max-width: 350px;
+    border-left: 4px solid var(--primary-color);
+    z-index: 9500;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all 0.3s ease-in-out;
+}
+
+/* 确保主内容区域不会覆盖模态框 */
+#main-container {
+    @apply container mx-auto px-4 py-8;
+    z-index: 1;
+    position: relative;
+}
+
+/* 模态框动画 */
+@keyframes modalFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes modalSlideIn {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* 模态框打开时的动画 */
+#contribute-modal:not(.hidden),
+#about-modal:not(.hidden) {
+    animation: modalFadeIn 0.3s ease-in-out;
+}
+
+#contribute-modal:not(.hidden) .modal-content,
+#about-modal:not(.hidden) .modal-content {
+    animation: modalSlideIn 0.3s ease-out;
+}
+
+/* 模态框内部元素样式 */
+.modal-content input,
+.modal-content select,
+.modal-content textarea {
+    @apply w-full p-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500;
+    z-index: 10001;
+}
+
+/* 模态框按钮样式 */
+.modal-content button {
+    @apply px-4 py-2 rounded-lg transition-colors;
+    z-index: 10001;
+}
+
+/* 确保模态框打开时背景不可滚动 */
+body.modal-open {
+    @apply overflow-hidden;
+}
+
+/* 卡片状态显示样式 */
+.proxy-card .status-text,
+.proxy-card .ResTime-text,
+.proxy-card .speed-text {
+    @apply px-2 py-1 rounded-md text-center;
+    min-width: 80px;
+}
+
+.proxy-card .status-text {
+    transition: all 0.3s ease;
+}
+
+.proxy-card .ResTime-text {
+    transition: all 0.3s ease;
+}
+
+.proxy-card .speed-text {
+    transition: all 0.3s ease;
+}
+
+/* 状态图标动画 */
+@keyframes statusPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.proxy-card .status-text i,
+.proxy-card .ResTime-text i,
+.proxy-card .speed-text i {
+    display: inline-block;
+    margin-right: 0.25rem;
+    animation: statusPulse 1s infinite;
+}
+
+/* 测试中状态 */
+.proxy-card.testing .status-text,
+.proxy-card.testing .ResTime-text {
+    @apply bg-gray-100;
+}
+
+/* 成功状态 */
+.proxy-card .status-text.text-green-500 {
+    @apply bg-green-50;
+}
+
+/* 失败状态 */
+.proxy-card .status-text.text-red-500 {
+    @apply bg-red-50;
+}
+
+/* 响应时间状态背景 */
+.proxy-card .ResTime-text.text-purple-500 { @apply bg-purple-50; }
+.proxy-card .ResTime-text.text-blue-500 { @apply bg-blue-50; }
+.proxy-card .ResTime-text.text-indigo-500 { @apply bg-indigo-50; }
+.proxy-card .ResTime-text.text-green-500 { @apply bg-green-50; }
+.proxy-card .ResTime-text.text-yellow-500 { @apply bg-yellow-50; }
+.proxy-card .ResTime-text.text-gray-500 { @apply bg-gray-50; }
+
+/* 速度状态背景 */
+.proxy-card .speed-text.text-purple-500 { @apply bg-purple-50; }
+.proxy-card .speed-text.text-blue-500 { @apply bg-blue-50; }
+.proxy-card .speed-text.text-indigo-500 { @apply bg-indigo-50; }
+.proxy-card .speed-text.text-green-500 { @apply bg-green-50; }
+.proxy-card .speed-text.text-yellow-500 { @apply bg-yellow-50; }
+.proxy-card .speed-text.text-red-500 { @apply bg-red-50; }
+.proxy-card .speed-text.text-gray-500 { @apply bg-gray-50; }
