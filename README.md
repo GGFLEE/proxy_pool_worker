@@ -7,7 +7,8 @@
 [在线访问](https://proxy-pool.fit2.fun)
 
 ### 命令行访问
-
+`curl  https://proxy-pool.fit2.fun/gitub`
+`(curl https://proxy-pool.fit2.fun/github).Content`
 #### 获取所有地址列表：
 
 `curl  https://proxy-pool.fit2.fun/list`
@@ -57,6 +58,7 @@ https://proxy.yaoyaoling.net
 #### 获取一个~~速度最快的~~地址：
 
 `curl https://proxy-pool.fit2.fun/github`
+`(curl https://proxy-pool.fit2.fun/github).Content`
 
 ## API 说明
 
